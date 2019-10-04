@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const apiRouter = require ('./APP_API/routes/index');
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/api', apiRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -39,5 +41,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-const apiRouter = require ('./APP_API/routes/index');
-app.use('/api', apiRouter);
+
