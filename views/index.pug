@@ -3,3 +3,11 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+block content
+  form(action="submit" method="post")
+    label(for="username") Username
+    input(type="text" name = "username")
+    label(for="password") Password
+    input(type="password" name = "password")
+    input(type="submit" value="Submit")
