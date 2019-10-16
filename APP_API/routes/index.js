@@ -20,7 +20,6 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/submit', (req, res, next) => {
-    console.log(req);
     ldap.authenticate(req.body.username, req.body.password, function (err, user) {
         if (err) {
             console.log(err);
