@@ -3,6 +3,7 @@ var router = express.Router();
 var LdapAuth= require('ldapauth-fork');
 var basicAuth = require('basic-auth');
 let constants = require('../CONSTANT');
+let student;
 var ldap = new LdapAuth({
   url: constants.URL,
   bindDN: constants.BINDDN,
@@ -18,7 +19,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/submit',(req,res,next)=>{
- console.log(req.body.username);
   ldap.authenticate(req.body.username, req.body.password, function (err, user) {
     if (err) {
       console.log(err);
@@ -27,7 +27,7 @@ router.post('/submit',(req,res,next)=>{
       console.log("user not found Error");
       res.send({ success: false, message: 'authentication failed' });
     } else if (user.uid) {
-      console.log("success : user " + user.uid + " found ");
+      console.log("success : user " + user.uid+ " found ");
       res.send({success: true, message: 'authentication successfull'});
     }
   });
