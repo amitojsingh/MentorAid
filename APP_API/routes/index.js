@@ -2,8 +2,14 @@ var express = require('express');
 var router = express.Router();
 var LdapAuth = require('ldapauth-fork');
 var basicAuth = require('basic-auth');
+const fs = require('fs');
+const jwt = require('jsonwebtoken');
 let constants = require('../../CONSTANT');
-let student;
+var privateKEY = fs.readFileSync(process.cwd() + '/.key/private.key', 'utf8');
+var publicKEY = fs.readFileSync(process.cwd() + '/.key/public.key', 'utf8');
+
+var i = 'MentorAid';
+var a = 'http://localhost:3000';
 var ldap = new LdapAuth({
     url: constants.URL,
     bindDN: constants.BINDDN,
@@ -29,7 +35,18 @@ router.post('/submit', (req, res, next) => {
             res.send({ success: false, message: 'user not found authentication failed' });
         } else if (user.uid) {
             console.log("success : user " + user.uid + " found ");
-            res.send({ success: true, message: 'authentication successfull' });
+            var payload = { id: user.uid };
+            var s = user.uid;
+            var signOptions = {
+                issuer: i,
+                subject: s,
+                audience: a,
+                expiresIn: "12h",
+                algorithm: "RS256"
+            };
+            var token = jwt.sign(payload, privateKEY, signOptions);
+
+      res.send({success: true, message: 'authentication successfull',name: user.gn,token: token});
         }
     });
 });
