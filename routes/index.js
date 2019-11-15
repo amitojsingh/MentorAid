@@ -42,7 +42,7 @@ router.post('/submit',(req,res,next)=>{
         audience: a,
         expiresIn: "12h",
         algorithm: "RS256"
-      };
+      };``
       var token = jwt.sign(payload,privateKEY,signOptions);
       res.render('success',{title: user.uid,
       token: token});

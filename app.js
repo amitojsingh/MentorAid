@@ -5,8 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport=require('passport');
 var bodyParser= require('body-parser');
-var ldapStrategy = require('passport-ldapauth');
-
 
 
 var indexRouter = require('./routes/index');
@@ -19,7 +17,25 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+//for cors
+  app.use(function (req, res, next) {
+    /*var err = new Error('Not Found');
+     err.status = 404;
+     next(err);*/
+    req.header('Access-Control-Allow-Origin', '*');
+    req.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Authorization');
 
+    // Website you wish to allow to connect
+    res.header('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Authorization');
+    next();
+
+  });
 
 
 // view engine setup
