@@ -20,19 +20,13 @@ export class AuthenticationService {
     this.storage.removeItem('login');
     this.router.navigate(['']);
   }
-  /*public isLoggedIn():boolean{
+  public isLoggedIn():boolean{
     const token: string = this.getToken();
-    if(token){
-      const payload = JSON.parse(atob(token.split('.',[1])));
-      return payload.exp>(Date.now()/1000)
-    }
-    else{
-      return false;
-    }
+    return !!token;
   }
   public getToken(): string{
     return this.storage.getItem('login');
-  }*/
+  }
   public saveToken(token: string) {
    this.storage.setItem('login', token);
 

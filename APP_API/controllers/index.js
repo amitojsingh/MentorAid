@@ -52,7 +52,7 @@ const login= (req,res)=>{
     
 }
 }
-const getSingleUser=(req,res)=>{
+const getCurrentUser=(req,res)=>{
 
 }
-module.exports ={ login,getSingleUser};
+module.exports ={ login,getCurrentUser};
