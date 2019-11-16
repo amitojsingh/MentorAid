@@ -26,16 +26,10 @@ const login= (req,res)=>{
     ldap.authenticate(req.body.username, req.body.password, function (err, user) {
         if (err) {
             console.log(err);
-            res.send({
-                success: false,
-                message: 'authentication failed'
-            });
+            return res.status(400).json(err)       
         } else if (!user.uid) {
             console.log("user not found Error");
-            res.send({
-                success: false,
-                message: 'user not found authentication failed'
-            });
+            res.status(400).json('user not found');
         } else if (user.uid) {
             console.log("success : user " + user.uid + " found ");
             var payload = {
