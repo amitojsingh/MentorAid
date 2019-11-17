@@ -2,11 +2,22 @@ var LdapAuth = require('ldapauth-fork');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 let constants = require('../../CONSTANT');
+var Ldapjs= require('ldapjs');
+var client= Ldapjs.createClient({
+    url: constants.URL
+})
 var privateKEY = fs.readFileSync(process.cwd() + '/.key/private.key', 'utf8');
-var publicKEY = fs.readFileSync(process.cwd() + '/.key/public.key', 'utf8');
+var publicKEY =  fs.readFileSync(process.cwd() + '/.key/public.key', 'utf8');
 
 var i = 'MentorAid';
 var a = 'http://localhost:3000';
+const config={
+    url: constants.URL,
+    base: constants.BINDDN,
+    dn:'cn=root',
+    password:constants.CREDENTIALS,
+};
+
 var ldap = new LdapAuth({
     url: constants.URL,
     bindDN: constants.BINDDN,
@@ -52,7 +63,47 @@ const login= (req,res)=>{
     
 }
 }
-const getCurrentUser=(req,res)=>{
-
+function verifyToken(req,res,next)
+{
+    if (!req.headers.authorization) {
+        return res.status(401).send('unauthorized request')
+    } else {
+        let token = req.headers.authorization.split(' '[1])
+        if (token === "null") {
+            return res.status(401).send('unauthorized request')
+        }
+        let payload = jwt.verify(token, publicKEY)
+        if (!payload) {
+            return res.status(401).send('unauthorized request')
+        }
+        req.id = payload.subject
+        next()
+    }
 }
-module.exports ={ login,getCurrentUser};
+const getCurrentUser= (req, res) => {
+    let uid = req.params.userid;
+    console.log(req.params.userid);
+    var opts= {
+        filters : `(uid=${uid})`,
+     attributes: ['sn', 'givenName', 'cn', 'displayName', 'uidNumber', 'gidNumber']
+}
+    client.search(`uid=${uid},ou=student,dc=hazur,dc=org`, opts, function(err, res) {
+
+
+        res.on('searchEntry', function(entry) {
+            console.log('entry: ' + JSON.stringify(entry.object));
+        });
+        res.on('searchReference', function(referral) {
+            console.log('referral: ' + referral.uris.join());
+        });
+        res.on('error', function(err) {
+            console.error('error: ' + err.message);
+        });
+        res.on('end', function(result) {
+            console.log('status: ' + result.status);
+        });
+    });
+}
+
+
+module.exports ={ login,getCurrentUser}
