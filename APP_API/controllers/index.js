@@ -80,7 +80,7 @@ function verifyToken(req,res,next)
         next()
     }
 }
-const getCurrentUser= (req, res) => {
+const getCurrentUser= (req, response) => {
     let uid = req.params.userid;
     console.log(req.params.userid);
     var opts= {
@@ -89,15 +89,15 @@ const getCurrentUser= (req, res) => {
 }
     client.search(`uid=${uid},ou=student,dc=hazur,dc=org`, opts, function(err, res) {
 
-
         res.on('searchEntry', function(entry) {
-            console.log('entry: ' + JSON.stringify(entry.object));
+             let userObject =JSON.stringify(entry.object);
+             response.status(200).json(entry.object);
         });
         res.on('searchReference', function(referral) {
             console.log('referral: ' + referral.uris.join());
         });
         res.on('error', function(err) {
-            console.error('error: ' + err.message);
+            response.status(404).json(err.message)
         });
         res.on('end', function(result) {
             console.log('status: ' + result.status);
