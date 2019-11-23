@@ -11,13 +11,18 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {AuthGuard} from "./auth.guard";
 import {HTTP_INTERCEPTORS } from "@angular/common/http";
 import {TokenInterceptorService} from "./token-interceptor.service";
+import {Framework} from "passport";
+import {FrameworkComponent} from "./framework/framework.component";
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     DashboardComponent,
     HomepageComponent,
-    HeaderComponent
+    HeaderComponent,
+    FrameworkComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,7 @@ import {TokenInterceptorService} from "./token-interceptor.service";
     RouterModule.forRoot([
       {
         path: '',
-        component: HeaderComponent
+        component: HomepageComponent
       },
       {
         path: 'login',
@@ -41,6 +46,6 @@ import {TokenInterceptorService} from "./token-interceptor.service";
     ])
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/'},AuthGuard,{provide: HTTP_INTERCEPTORS, useClass:TokenInterceptorService, multi: true}],
-  bootstrap: [HomepageComponent]
+  bootstrap: [FrameworkComponent]
 })
 export class AppModule { }

@@ -17,8 +17,4 @@ export class DashboardComponent implements OnInit {
   public logout(): void{
     return this.authenticationService.logout();
   }
-  public isLoggedIn(): Boolean{
-    return this.authenticationService.isLoggedIn();
-
-  }
 }

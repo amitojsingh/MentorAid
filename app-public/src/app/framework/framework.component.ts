@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from "../authentication.service";
+import {Loginusers} from "../loginusers";
 
 @Component({
   selector: 'app-framework',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrameworkComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+  }
+  public logout(): void {
+    return this.authenticationService.logout();
+  }
+  public isLoggedIn(): Boolean {
+    return this.authenticationService.isLoggedIn();
+  }
+  public getUsername(): string{
+    const user:Loginusers=this.authenticationService.getCurrentUser();
+    return user.username;
   }
 
 }

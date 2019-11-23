@@ -1,4 +1,14 @@
 <span><a routerLink=''>Home</a>
-    <a routerLink='login'>Login</a>
-</span>
+  <ng-container *ngIf="isLoggedIn(); then logIn; else logOut">
+
+  </ng-container>
+  <ng-template #logIn>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a (click)="logout()">logout</a>
+    <p>{{getUsername()}}</p>
+
+  </ng-template>
+  <ng-template #logOut>
+    <a routerLink="/login">Log in</a>
+  </ng-template>
 <router-outlet></router-outlet>

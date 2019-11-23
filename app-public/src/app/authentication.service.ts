@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Authresponse} from "./authresponse";
 import {UserServiceService} from "./user-service.service";
 import { from } from 'rxjs';
+import {getToken} from "codelyzer/angular/styles/cssLexer";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,15 @@ export class AuthenticationService {
     this.storage.removeItem('login');
     this.router.navigate(['']);
   }
+  public getCurrentUser():Loginusers{
+    if(this.isLoggedIn()){
+      const token : string = this.getToken();
+      const {id} = JSON.parse(atob(token.split('.')[1]));
+
+      const username=id;
+      return {username} as Loginusers
+    }
+  }
   public isLoggedIn():boolean{
     const token: string = this.getToken();
     return !!token;
@@ -29,6 +39,5 @@ export class AuthenticationService {
   }
   public saveToken(token: string) {
    this.storage.setItem('login', token);
-
   }
 }
