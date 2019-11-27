@@ -42,6 +42,11 @@ import { CreateComponent } from './create/create.component';
         path: 'dashboard',
         component: DashboardComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'create',
+        component: CreateComponent,
+        canActivate: [AuthGuard]
       }
     ])
   ],

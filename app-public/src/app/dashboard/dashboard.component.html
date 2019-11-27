@@ -1,2 +1,6 @@
-<p>dashboard works!</p>
-<a (click)="logout()"> Logout</a>
+<div *ngFor="let r of requests">
+  <p>UID= {{r.uid}}</p>
+  <p>{{r.tid}}</p>
+  <p>{{r.subject}}</p>
+  <p>{{r.problem}}</p>
+</div>

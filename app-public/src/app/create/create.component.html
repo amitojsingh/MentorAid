@@ -1,29 +1,26 @@
 <form (ngSubmit)="createRequest(newrequest)">
 <div class="form-group">
-  <div *ngIf="formError" class="jasmine-alert">
+  <!--<div *ngIf="formError" class="jasmine-alert">
     {{formError}}
-  </div>
+  </div>-->
 </div>
 <div class="form-group">
-  <input type="radio" name="teacher" value="Komal">
-  <input type = "radio" name=" teacher" value = "Blaik">
-  <input type="radio" name ="teacher" value = "Constantine">
+  <input [(ngModel)]="newrequest.tid" type="radio" name="teacher" value="Komal">
+  <input [(ngModel)]="newrequest.tid" type = "radio" name=" teacher" value = "Blaik">
+  <input [(ngModel)]="newrequest.tid" type="radio" name ="teacher" value = "Constantine">
 </div>
-<div class="form-group">
-  <label for="problem">Problem</label>
-  <input type="text" name = "problem" id ="problem">
-</div>
+
 <div class="form-group">
   <label for="problem">Problem</label>
-  <input type="text" name = "problem" id ="problem">
+  <input [(ngModel)]="newrequest.problem"type="text" name = "problem" id ="problem">
 </div>
 <div class="form-group">
   <label for="subject">Subject</label>
-  <input type="text" name ="subject" id = "subject">
+  <input [(ngModel)]="newrequest.subject" type="text" name ="subject" id = "subject">
 </div>
 <div class="form-group">
   <label for="count">Number of students</label>
-  <input type="number" name ="count" id="count">
+  <input [(ngModel)]="newrequest.count" type="number" name ="count" id="count">
 </div>
 <div class="form-group">
   <button class="btn btn-secondary" type="submit">Publish</button>
