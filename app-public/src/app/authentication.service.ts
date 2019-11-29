@@ -21,13 +21,14 @@ export class AuthenticationService {
     this.storage.removeItem('login');
     this.router.navigate(['']);
   }
-  public getCurrentUser():Loginusers{
+  public getCurrentUser(){
     if(this.isLoggedIn()){
       const token : string = this.getToken();
       const {id} = JSON.parse(atob(token.split('.')[1]));
-
+      const {dn}= JSON.parse(atob(token.split('.')[1]));
+      const role = (dn.split(',')[1]).split('=')[1];
       const username=id;
-      return {username} as Loginusers
+      return [username,role]
     }
   }
   public isLoggedIn():boolean{

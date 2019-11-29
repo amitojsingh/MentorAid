@@ -22,7 +22,7 @@ var ldap = new LdapAuth({
     url: constants.URL,
     bindDN: constants.BINDDN,
     bindCredentials: constants.CREDENTIALS,
-    searchBase: 'ou=student,dc=hazur,dc=org',
+    searchBase: 'dc=hazur,dc=org',
     searchFilter: '(uid={{username}})',
     reconnect: true
 
@@ -43,8 +43,10 @@ const login= (req,res)=>{
             res.status(400).json('user not found');
         } else if (user.uid) {
             console.log("success : user " + user.uid + " found ");
+            console.log(user);
             var payload = {
-                id: user.uid
+                id: user.uid,
+                dn: user.dn
             };
             var s = user.uid;
             var signOptions = {

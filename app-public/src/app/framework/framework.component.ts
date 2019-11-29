@@ -20,8 +20,12 @@ export class FrameworkComponent implements OnInit {
     return this.authenticationService.isLoggedIn();
   }
   public getUsername(): string{
-    const user:Loginusers=this.authenticationService.getCurrentUser();
-    return user.username;
+    const user=this.authenticationService.getCurrentUser();
+    return user[0];
+  }
+  public getRole():string{
+    const role=this.authenticationService.getCurrentUser();
+    return role[1];
   }
 
 }

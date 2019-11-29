@@ -4,9 +4,11 @@
   </ng-container>
   <ng-template #logIn>
     <a routerLink="/dashboard">Dashboard</a>
+    <div *ngIf="getRole()=='student'">
     <a routerLink="/create">Create</a>
+    </div>
     <a (click)="logout()">logout</a>
-    <p>{{getUsername()}}</p>
+    <p>{{getUsername()}} as {{getRole()}}</p>
 
   </ng-template>
   <ng-template #logOut>
