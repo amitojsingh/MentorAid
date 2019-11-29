@@ -20,7 +20,7 @@ export class CreateComponent implements OnInit {
     subject:string;
     count:string;
 }={
-    uid:this.currentUser.username,
+    uid:this.currentUser[0],
     tid:'',
     problem:'',
     subject:'',
