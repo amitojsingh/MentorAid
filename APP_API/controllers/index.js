@@ -106,6 +106,45 @@ const getCurrentUser= (req, response) => {
         });
     });
 }
+const getGroups = (req,response)=>{
+var groups= [];
+    var opts= {
+        scope:'sub' ,
+        attributes: ['cn', 'gidNumber'],
+
+    }
+    client.search( `ou=groups,dc=hazur,dc=org`, opts, function(err, res) {
+
+      res.on("searchEntry", function (entry) {
+            groups.push(entry.dn.split(',')[0].split('=')[1]);
+
+       })
+        res.on("end",function () {
+            console.log(groups);
+            response.status(200).json(groups);
+            
+        })
+    });
 
 
-module.exports ={ login,getCurrentUser}
+}
+const getTeachers=(req,response)=>{
+    var teachers=[];
+    var opts={
+        scope: 'sub',
+        attributes:['uid','gidNumber']
+    }
+    client.search(`ou=employee,dc=hazur,dc=org`,opts,function (err,res) {
+        res.on("searchEntry", function (entry) {
+            teachers.push(entry.dn.split(',')[0].split('=')[1]);
+
+        })
+        res.on("end",function () {
+            response.status(200).json(teachers);
+        })
+    })
+}
+
+
+
+module.exports ={ login,getCurrentUser,getGroups,getTeachers}

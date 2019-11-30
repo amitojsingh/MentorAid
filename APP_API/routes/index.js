@@ -16,4 +16,8 @@ router.route("/stdrequest")
     .get(stdrequestCtrl.getstdrequest)
     .post(stdrequestCtrl.createstdrequest);
 
+router.route('/groups')
+    .get(indexCtrl.getGroups);
+router.route('/teachers')
+    .get(indexCtrl.getTeachers);
 module.exports=router;
