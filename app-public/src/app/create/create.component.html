@@ -1,13 +1,11 @@
-<form (ngSubmit)="createRequest(newrequest)">
+<form (ngSubmit)="createRequest(newrequest)" xmlns="http://www.w3.org/1999/html">
 <div class="form-group">
   <!--<div *ngIf="formError" class="jasmine-alert">
     {{formError}}
   </div>-->
 </div>
-<div class="form-group">
-  <input [(ngModel)]="newrequest.tid" type="radio" name="teacher" value="Komal">
-  <input [(ngModel)]="newrequest.tid" type = "radio" name=" teacher" value = "Blaik">
-  <input [(ngModel)]="newrequest.tid" type="radio" name ="teacher" value = "Constantine">
+<div *ngFor="let prof of teachers;" class="form-group">
+ {{prof}} <input [(ngModel)]="newrequest.tid"   type="radio" name="teacher" value="{{prof}}">
 </div>
 
 <div class="form-group">
@@ -15,8 +13,10 @@
   <input [(ngModel)]="newrequest.problem"type="text" name = "problem" id ="problem">
 </div>
 <div class="form-group">
-  <label for="subject">Subject</label>
-  <input [(ngModel)]="newrequest.subject" type="text" name ="subject" id = "subject">
+  <label >Subject</label>
+  <select [(ngModel)]="newrequest.subject"  [ngModelOptions]="{standalone: true}">
+    <option *ngFor="let item of subjects;" value="{{item}}">{{item}}</option>
+  </select>
 </div>
 <div class="form-group">
   <label for="count">Number of students</label>
@@ -26,3 +26,5 @@
   <button class="btn btn-secondary" type="submit">Publish</button>
 </div>
 </form>
+
+
