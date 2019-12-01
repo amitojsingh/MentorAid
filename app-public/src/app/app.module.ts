@@ -14,6 +14,7 @@ import {TokenInterceptorService} from "./token-interceptor.service";
 import {Framework} from "passport";
 import {FrameworkComponent} from "./framework/framework.component";
 import { CreateComponent } from './create/create.component';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CreateComponent } from './create/create.component';
     HomepageComponent,
     HeaderComponent,
     FrameworkComponent,
-    CreateComponent
+    CreateComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,11 @@ import { CreateComponent } from './create/create.component';
         path: 'create',
         component: CreateComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'stdrequest/:stdrequestid',
+        component:DetailsComponent,
+        canActivate:[AuthGuard]
       }
     ])
   ],

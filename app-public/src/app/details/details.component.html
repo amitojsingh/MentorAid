@@ -1,0 +1,10 @@
+
+<div class="Details">
+  <h2>
+    {{newrequest.uid}}
+  </h2>
+  <p>{{newrequest.problem}}</p>
+  <p>{{newrequest.subject}}</p>
+  <button class="btn btn-secondary" (click)="approve(newrequest._id);" >Edit</button>
+  <button class="btn btn-danger"(click)="disaprove(newrequest._id);">Delete</button>
+</div>

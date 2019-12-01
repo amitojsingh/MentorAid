@@ -11,7 +11,6 @@ import {Stdrequest} from "../stdrequest";
 })
 export class DashboardComponent implements OnInit {
   requests: Stdrequest[]
-  finalRequests: Stdrequest[];
   currentUser=this.authenticationService.getCurrentUser();
   userRole=this.currentUser[1];
 
@@ -19,9 +18,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.stdRequestService.getRequests().then((requests: Stdrequest[]) => this.requests = requests.filter(srequest => srequest.uid==this.currentUser[0]));
-    if (this.requests) {
-      console.log("this is workding");
-      this.finalRequests = this.requests.filter(r => r.uid != this.currentUser[0]);
-    }
+  }
+  getSingleRequest(stdrequestid: string){
+      this.stdRequestService.getSingleRequest(stdrequestid)
+    this.router.navigate(['stdrequest/'+stdrequestid])
+
   }
 }

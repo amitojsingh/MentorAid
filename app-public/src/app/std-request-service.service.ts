@@ -10,6 +10,13 @@ export class StdRequestServiceService {
   private requestUrl = 'http://localhost:3000/api/'
   constructor(private http: Http) { }
 
+  getSingleRequest(stdrequestid: string): Promise<void | Stdrequest>{
+    console.log(stdrequestid);
+    return this.http.get(this.requestUrl+"stdrequest/"+stdrequestid)
+      .toPromise()
+      .then(response=>response.json() as Stdrequest)
+      .catch(this.handleError);
+  }
   getRequests():Promise<void|Stdrequest[]>{
     return this.http.get(this.requestUrl+"stdrequest")
       .toPromise()
@@ -36,6 +43,6 @@ export class StdRequestServiceService {
   }
 
   private handleError(error: any){
-    console.log("error");
+    console.log(error);
   }
 }

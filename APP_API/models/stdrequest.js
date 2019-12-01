@@ -22,19 +22,8 @@ const stdRequestSchema = new mongoose.Schema({
         required:true
     }
 });
-const tResponseSchema=new mongoose.Schema({
 
-    studentRequest: [stdRequestSchema],
-    status:{
-        type: String,
-        required: true
-    },
-    room:{
-        type: String,
-        required: true
-    }
-});
 
 mongoose.model('stdRequest', stdRequestSchema);
-mongoose.model('tResponse',tResponseSchema)
+
 
