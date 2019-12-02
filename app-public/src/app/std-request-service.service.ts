@@ -17,6 +17,12 @@ export class StdRequestServiceService {
       .then(response=>response.json() as Stdrequest)
       .catch(this.handleError);
   }
+  updateRequest(stdrequestid: string, newRequest: Stdrequest): Promise<void| Stdrequest>{
+    return this.http.put(this.requestUrl+"stdrequest/"+stdrequestid,newRequest)
+      .toPromise()
+      .then(response=>response.json() as Stdrequest)
+      .catch(this.handleError);
+  }
   getRequests():Promise<void|Stdrequest[]>{
     return this.http.get(this.requestUrl+"stdrequest")
       .toPromise()

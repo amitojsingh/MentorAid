@@ -1,13 +1,13 @@
 
 <div class="Details">
-  <form (ngSubmit)="updateRequest(newrequest._id,newrequest)">
+  <form>
   <h2>
     {{newrequest.uid}}
   </h2>
   <p>{{newrequest.problem}}</p>
   <p>{{newrequest.subject}}</p>
-  <input type="date" name="date">
-  <button class="btn btn-secondary" (click)="approve(newrequest._id);" >Accept</button>
-  <button class="btn btn-danger"(click)="disaprove(newrequest._id);">Decline</button>
+  <input [(ngModel)]="newrequest.date" type="date" name="date">
+  Accept  <input type="radio" [(ngModel)]="newrequest.requestStatus" (click)="updateRequest(newrequest._id,newrequest)"  name="requestStatus" value="1">
+  Reject <input type="radio" [(ngModel)]="newrequest.requestStatus" (click)="updateRequest(newrequest._id,newrequest)" name="requestStatus" value="0">
   </form>
 </div>

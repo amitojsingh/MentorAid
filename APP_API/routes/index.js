@@ -16,6 +16,7 @@ router.route("/stdrequest")
     .post(stdrequestCtrl.createstdrequest);
 router.route("/stdrequest/:stdrequestid")
     .get(stdrequestCtrl.getSinglestdrequest)
+    .put(stdrequestCtrl.updatestdrequest);
 
 router.route('/groups')
     .get(indexCtrl.getGroups);

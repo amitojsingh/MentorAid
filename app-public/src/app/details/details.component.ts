@@ -24,10 +24,7 @@ export class DetailsComponent implements OnInit {
         this.newrequest = newrequest;
       })
   }
-  approve(requestid: string){
-
-  }
-  disaprove(requestid: string){
-
+  public updateRequest(stdrequestid: string, newRequest: Stdrequest): void{
+    this.StdRequestService.updateRequest(stdrequestid,newRequest);
   }
 }

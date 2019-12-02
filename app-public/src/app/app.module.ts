@@ -54,7 +54,7 @@ import { DetailsComponent } from './details/details.component';
         path: 'stdrequest/:stdrequestid',
         component:DetailsComponent,
         canActivate:[AuthGuard]
-      }
+      },
     ])
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/'},AuthGuard,{provide: HTTP_INTERCEPTORS, useClass:TokenInterceptorService, multi: true}],
