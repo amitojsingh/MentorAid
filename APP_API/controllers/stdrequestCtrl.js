@@ -25,7 +25,7 @@ const createstdrequest =function (req,res) {
         tid: req.body.tid,
         problem:req.body.problem,
         subject:req.body.subject,
-        count:req.body.count
+        count:req.body.count,
 
     }, (err,stdrequestdata) => {
         if(err){
@@ -65,7 +65,7 @@ const getSinglestdrequest =function (req,res) {
 
 };
 
-/*const updatestdrequest =function (req,res) {
+const updatestdrequest =function (req,res) {
     if(!req.params.stdrequestid){
         res
             .status(404)
@@ -91,11 +91,14 @@ const getSinglestdrequest =function (req,res) {
                     .json(err);
                 return;
             }
-            stdrequestdata.name = req.body.name;
-            stdrequestdata.type = req.body.type;
-            stdrequestdata.image=req.body.image;
-            stdrequestdata.summary=req.body.summary;
-            stdrequestdata.price=req.body.price;
+            stdrequestdata.uid = req.body.uid;
+            stdrequestdata.tid = req.body.tid;
+            stdrequestdata.count=req.body.count;
+            stdrequestdata.problem=req.body.problem;
+            stdrequestdata.subject=req.body.subject;
+            stdrequestdata.requestStatus=req.body.requestStatus;
+            stdrequestdata.date=req.body.date;
+
             stdrequestdata.save((err, stdrequestdata) => {
 
                 if(err){
@@ -114,7 +117,7 @@ const getSinglestdrequest =function (req,res) {
 
 };
 
-
+/*
 const deletestdrequest = function (req,res) {
     const stdrequestid = req.params.stdrequestid;
 
@@ -148,5 +151,6 @@ const deletestdrequest = function (req,res) {
 module.exports={
     getstdrequest,
     createstdrequest,
-    getSinglestdrequest
+    getSinglestdrequest,
+    updatestdrequest
 }

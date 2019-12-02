@@ -1,9 +1,20 @@
+<ng-container *ngIf="userRole=='employee' then employee; else student">
 
-<div *ngFor="let r of requests">
+</ng-container>
+<ng-template #employee>
+<div *ngFor="let r of finalRequest">
   <p>UID= {{r.uid}}</p>
-  <p>{{r.tid}}</p>
   <p>{{r.subject}}</p>
   <p>{{r.problem}}</p>
   <a (click)="getSingleRequest(r._id)">View Details</a>
 </div>
+</ng-template>
+<ng-template #student>
+  <div *ngFor="let r of requests">
+    <p>UID= {{r.uid}}</p>
+    <p>{{r.tid}}</p>
+    <p>{{r.subject}}</p>
+    <p>{{r.problem}}</p>
+  </div>
+</ng-template>
 

@@ -4,4 +4,6 @@ export class Stdrequest {
   problem:string;
   subject:string;
   count:string;
+  date:string;
+  requestStatus:string;
 }

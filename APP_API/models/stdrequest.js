@@ -20,10 +20,15 @@ const stdRequestSchema = new mongoose.Schema({
     count:{
         type: String,
         required:true
+    },
+    requestStatus:{
+        type: Boolean
+    },
+    date:{
+        type: Date
     }
 });
 
 
 mongoose.model('stdRequest', stdRequestSchema);
-
 
