@@ -5,5 +5,5 @@ export class Stdrequest {
   subject:string;
   count:string;
   date:string;
-  requestStatus: boolean;
+  requestStatus: number;
 }

@@ -10,16 +10,29 @@ import {Stdrequest} from "../stdrequest";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  requests: Stdrequest[]
-  finalRequest: Stdrequest[]
+  studentRequests: Stdrequest[]
+  teacherRequest: Stdrequest[]
+  studentPending: Stdrequest[]
+  studentApproved: Stdrequest[]
+  teacherPending: Stdrequest[]
+  teacherApproved: Stdrequest[]
+
+
   currentUser=this.authenticationService.getCurrentUser();
   userRole=this.currentUser[1];
 
   constructor(private authenticationService: AuthenticationService,private router: Router,private stdRequestService:StdRequestServiceService) { }
 
   ngOnInit() {
-    this.stdRequestService.getRequests().then((requests: Stdrequest[]) => this.requests = requests.filter(srequest => srequest.uid==this.currentUser[0]));
-    this.stdRequestService.getRequests().then((finalRequest: Stdrequest[]) => this.finalRequest = finalRequest.filter(srequest => srequest.tid==this.currentUser[0]));
+    if (this.userRole == "student") {
+      this.stdRequestService.getRequests().then((studentRequests: Stdrequest[]) => this.studentRequests = studentRequests.filter(srequest => srequest.uid == this.currentUser[0]));
+      this.stdRequestService.getRequests().then((studentPending: Stdrequest[]) => this.studentPending = studentPending.filter(srequest => (srequest.uid == this.currentUser[0])&&(srequest.requestStatus==null)));
+      this.stdRequestService.getRequests().then((studentApproved: Stdrequest[]) => this.studentApproved = studentApproved.filter(srequest => (srequest.uid == this.currentUser[0])&&(srequest.requestStatus==1)));
+    } else {
+      this.stdRequestService.getRequests().then((teacherRequest: Stdrequest[]) => this.teacherRequest = teacherRequest.filter(srequest => (srequest.tid == this.currentUser[0])));
+      this.stdRequestService.getRequests().then((teacherPending: Stdrequest[]) => this.teacherPending = teacherPending.filter(srequest => (srequest.tid == this.currentUser[0])&&(srequest.requestStatus==null)));
+      this.stdRequestService.getRequests().then((teacherApproved: Stdrequest[]) => this.teacherApproved = teacherApproved.filter(srequest => (srequest.tid == this.currentUser[0])&&(srequest.requestStatus == 1)));
+    }
   }
   getSingleRequest(stdrequestid: string){
       this.stdRequestService.getSingleRequest(stdrequestid)

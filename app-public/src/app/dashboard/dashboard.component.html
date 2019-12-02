@@ -2,7 +2,8 @@
 
 </ng-container>
 <ng-template #employee>
-<div *ngFor="let r of finalRequest">
+  <h2>Pending Requests</h2>
+<div *ngFor="let r of teacherPending">
   <p>UID= {{r.uid}}</p>
   <p>{{r.subject}}</p>
   <p>{{r.problem}}</p>
@@ -10,9 +11,25 @@
   <p>{{r.date}}</p>
   <a (click)="getSingleRequest(r._id)">View Details</a>
 </div>
+  <h2>Approved Request</h2>
+  <div *ngFor="let r of teacherApproved">
+    <p>UID= {{r.uid}}</p>
+    <p>{{r.subject}}</p>
+    <p>{{r.problem}}</p>
+    <P>{{r.requestStatus}}</P><br>
+    <p>{{r.date}}</p>
+  </div>
 </ng-template>
 <ng-template #student>
-  <div *ngFor="let r of requests">
+  <h2>Pending Request</h2>
+  <div *ngFor="let r of studentPending">
+    <p>UID= {{r.uid}}</p>
+    <p>{{r.tid}}</p>
+    <p>{{r.subject}}</p>
+    <p>{{r.problem}}</p>
+  </div>
+  <h2>Approved Request</h2>
+  <div *ngFor="let r of studentApproved">
     <p>UID= {{r.uid}}</p>
     <p>{{r.tid}}</p>
     <p>{{r.subject}}</p>
