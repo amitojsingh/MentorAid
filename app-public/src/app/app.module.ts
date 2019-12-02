@@ -15,6 +15,10 @@ import {Framework} from "passport";
 import {FrameworkComponent} from "./framework/framework.component";
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarRequestComponent } from './details/calendar-request/calendar-request.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -24,13 +28,19 @@ import { DetailsComponent } from './details/details.component';
     HeaderComponent,
     FrameworkComponent,
     CreateComponent,
-    DetailsComponent
+    DetailsComponent,
+    CalendarRequestComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     RouterModule.forRoot([
       {
         path: '',
@@ -55,7 +65,8 @@ import { DetailsComponent } from './details/details.component';
         component:DetailsComponent,
         canActivate:[AuthGuard]
       },
-    ])
+    ]),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/'},AuthGuard,{provide: HTTP_INTERCEPTORS, useClass:TokenInterceptorService, multi: true}],
   bootstrap: [FrameworkComponent]
