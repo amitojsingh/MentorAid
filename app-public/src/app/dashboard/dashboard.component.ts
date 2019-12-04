@@ -17,6 +17,11 @@ export class DashboardComponent implements OnInit {
   teacherPending: Stdrequest[]
   teacherApproved: Stdrequest[]
 
+  pageContent={
+    calender:{
+      request: this.studentApproved
+    }
+  }
 
   currentUser=this.authenticationService.getCurrentUser();
   userRole=this.currentUser[1];

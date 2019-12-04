@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CalendarEventAction, CalendarView, CalendarEvent, CalendarEventTimesChangedEvent} from "angular-calendar";
 import {subDays,startOfDay, endOfDay, addDays, endOfMonth, isSameDay, isSameMonth, addHours,} from 'date-fns';
 import {Subject} from "rxjs";
@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {Stdrequest} from "../../stdrequest";
 import {StdRequestServiceService} from "../../std-request-service.service";
 import {AuthenticationService} from "../../authentication.service";
+import {start} from "repl";
+import {eventNames} from "cluster";
 
 const colors: any = {
   red: {
@@ -28,11 +30,9 @@ const colors: any = {
   styleUrls: ['./calendar-request.component.css']
 })
 export class CalendarRequestComponent implements OnInit {
-  currentUser=this.authenticationService.getCurrentUser();
-  userRole=this.currentUser[1];
 
-  teacherApproved: Stdrequest[]
-  studentApproved: Stdrequest[]
+ @Input() public content: any;
+
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -65,7 +65,9 @@ export class CalendarRequestComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
+events: CalendarEvent [];
+
+  /*events: CalendarEvent[] = [
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
@@ -104,7 +106,7 @@ export class CalendarRequestComponent implements OnInit {
       },
       draggable: true
     }
-  ];
+  ];*/
 
   activeDayIsOpen: boolean = true;
 
@@ -112,8 +114,22 @@ export class CalendarRequestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stdRequestService.getRequests().then((studentApproved: Stdrequest[]) => this.studentApproved = studentApproved.filter(srequest => (srequest.uid == this.currentUser[0])&&(srequest.requestStatus==1)));
-    this.stdRequestService.getRequests().then((teacherApproved: Stdrequest[]) => this.teacherApproved = teacherApproved.filter(srequest => (srequest.tid == this.currentUser[0])&&(srequest.requestStatus == 1)));
+    for (var value of this.content){
+      this.events=[
+        {
+          start: new Date(value.date),
+          title: value.problem,
+          color: colors.yellow,
+          actions: this.actions,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          },
+          draggable: true
+        }
+        ]
+    }
+
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {

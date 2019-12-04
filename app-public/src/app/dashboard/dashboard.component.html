@@ -19,6 +19,7 @@
     <P>{{r.requestStatus}}</P><br>
     <p>{{r.date}}</p>
   </div>
+  <app-calendar-request [content]= teacherApproved ></app-calendar-request>
 </ng-template>
 <ng-template #student>
   <h2>Pending Request</h2>
@@ -35,7 +36,8 @@
     <p>{{r.subject}}</p>
     <p>{{r.problem}}</p>
   </div>
+  <app-calendar-request [content]= studentApproved ></app-calendar-request>
 </ng-template>
 
-<app-calendar-request></app-calendar-request>
+
 
