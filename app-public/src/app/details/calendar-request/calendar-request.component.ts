@@ -9,6 +9,7 @@ import {AuthenticationService} from "../../authentication.service";
 import {start} from "repl";
 import {eventNames} from "cluster";
 
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -108,27 +109,66 @@ events: CalendarEvent [];
     }
   ];*/
 
+  approved: Stdrequest[]
   activeDayIsOpen: boolean = true;
+  result: Stdrequest[]
+  currentUser=this.authenticationService.getCurrentUser();
+  userRole=this.currentUser[1];
 
   constructor(private modal: NgbModal, private stdRequestService: StdRequestServiceService, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
-    for (var value of this.content){
-      this.events=[
-        {
-          start: new Date(value.date),
-          title: value.problem,
-          color: colors.yellow,
-          actions: this.actions,
-          resizable: {
-            beforeStart: true,
-            afterEnd: true
-          },
-          draggable: true
+    function processed(data:void | Stdrequest[]) {
+      for(var value of data[Symbol.iterator]()){
+        if((value.date!= null)&&(value.requestStatus==1)){
+          localStorage.setItem('name',JSON.stringify(value))
+          return value
         }
+        }
+
+      }
+
+    this.stdRequestService.getRequests().then(data=>processed(data))
+
+    this.approved=JSON.parse(localStorage.getItem('name'));
+    if(this.userRole=="student") {
+      if (this.currentUser[0] == this.approved['uid']) {
+        this.events=[
+          {
+            start:addHours(new Date(this.approved["date"].split('T')[0]),3),
+            title: this.approved["problem"] + '/' + this.approved["tid"],
+            color: colors.yellow,
+            actions: this.actions,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            },
+            draggable: true
+          }
         ]
+      }
     }
+    else{
+      if (this.currentUser[0]== this.approved["tid"]){
+        console.log(this.approved["requestStatus"])
+        this.events=[
+          {
+            start: new Date(this.approved["date"].split('T')[0]),
+            title: this.approved["problem"] + '/' + this.approved["uid"],
+            color: colors.yellow,
+            actions: this.actions,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            },
+            draggable: true
+          }
+          ]
+      }
+    }
+
+
 
   }
 

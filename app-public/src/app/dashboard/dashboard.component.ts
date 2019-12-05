@@ -31,12 +31,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     if (this.userRole == "student") {
       this.stdRequestService.getRequests().then((studentRequests: Stdrequest[]) => this.studentRequests = studentRequests.filter(srequest => srequest.uid == this.currentUser[0]));
-      this.stdRequestService.getRequests().then((studentPending: Stdrequest[]) => this.studentPending = studentPending.filter(srequest => (srequest.uid == this.currentUser[0])&&(srequest.requestStatus==null)));
-      this.stdRequestService.getRequests().then((studentApproved: Stdrequest[]) => this.studentApproved = studentApproved.filter(srequest => (srequest.uid == this.currentUser[0])&&(srequest.requestStatus==1)));
+      this.stdRequestService.getRequests().then((studentPending: Stdrequest[])=> this.studentPending = studentPending.filter(srequest => (srequest.uid == this.currentUser[0])&&(srequest.requestStatus==null)));
+      this.stdRequestService.getRequests().then((studentApproved: Stdrequest[]) => this.studentApproved = studentApproved.filter(arequest => (arequest.uid == this.currentUser[0])&&(arequest.requestStatus==1)));
     } else {
       this.stdRequestService.getRequests().then((teacherRequest: Stdrequest[]) => this.teacherRequest = teacherRequest.filter(srequest => (srequest.tid == this.currentUser[0])));
       this.stdRequestService.getRequests().then((teacherPending: Stdrequest[]) => this.teacherPending = teacherPending.filter(srequest => (srequest.tid == this.currentUser[0])&&(srequest.requestStatus==null)));
-      this.stdRequestService.getRequests().then((teacherApproved: Stdrequest[]) => this.teacherApproved = teacherApproved.filter(srequest => (srequest.tid == this.currentUser[0])&&(srequest.requestStatus == 1)));
+      this.stdRequestService.getRequests().then((teacherApproved: Stdrequest[]) => this.teacherApproved = teacherApproved.filter(srequest => (srequest.tid == this.currentUser[0])&&(srequest.requestStatus ==1)));
     }
   }
   getSingleRequest(stdrequestid: string){
