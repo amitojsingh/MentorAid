@@ -32,7 +32,7 @@ const colors: any = {
 })
 export class CalendarRequestComponent implements OnInit {
 
- @Input() public content: any;
+  @Input() public content: any;
 
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
@@ -66,7 +66,7 @@ export class CalendarRequestComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-events: CalendarEvent [];
+  events: CalendarEvent [];
 
   /*events: CalendarEvent[] = [
     {
@@ -109,68 +109,63 @@ events: CalendarEvent [];
     }
   ];*/
 
+  newarray = []
   approved: Stdrequest[]
+  storerequests: Stdrequest []
   activeDayIsOpen: boolean = true;
   result: Stdrequest[]
-  currentUser=this.authenticationService.getCurrentUser();
-  userRole=this.currentUser[1];
+  currentUser = this.authenticationService.getCurrentUser();
+  userRole = this.currentUser[1];
 
   constructor(private modal: NgbModal, private stdRequestService: StdRequestServiceService, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
-    function processed(data:void | Stdrequest[]) {
-      for(var value of data[Symbol.iterator]()){
-        if((value.date!= null)&&(value.requestStatus==1)){
-          localStorage.setItem('name',JSON.stringify(value))
-          return value
-        }
-        }
 
-      }
 
-    this.stdRequestService.getRequests().then(data=>processed(data))
+    this.stdRequestService.getRequests().then(data => processed(data))
 
-    this.approved=JSON.parse(localStorage.getItem('name'));
-    if(this.userRole=="student") {
-      if (this.currentUser[0] == this.approved['uid']) {
-        this.events=[
-          {
-            start:addHours(new Date(this.approved["date"].split('T')[0]),3),
-            title: this.approved["problem"] + '/' + this.approved["tid"],
+    this.approved = JSON.parse(localStorage.getItem('name'));
+    var newevent = {}
+
+    for (var i = 0; i <= this.approved.length; i++) {
+      if ((this.approved[i].date != null) && (this.approved[i].requestStatus == 1)) {
+        if ((this.userRole == "student") && (this.currentUser[0] == this.approved[i].uid)) {
+          newevent = {
+            start: convertDateToUTC(new Date(this.approved[i]["date"].split('T')[0])),
+            title: this.approved[i]["problem"] + '/' + this.approved[i]["tid"],
             color: colors.yellow,
             actions: this.actions,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
-            },
-            draggable: true
           }
-        ]
+          this.newarray.push(newevent);
+          this.events = this.newarray;
+          console.log(this.events)
+        }
+      else if((this.userRole=="employee")&&(this.currentUser[0]==this.approved[i].tid)) {
+        newevent = {
+          start: convertDateToUTC(new Date(this.approved[i]["date"].split('T')[0])),
+          title: this.approved[i]["problem"] + '/' + this.approved[i]["uid"],
+          color: colors.yellow,
+          actions: this.actions,
+        }
+        this.newarray.push(newevent);
+        this.events = this.newarray;
+        console.log(this.events)
       }
     }
-    else{
-      if (this.currentUser[0]== this.approved["tid"]){
-        console.log(this.approved["requestStatus"])
-        this.events=[
-          {
-            start: new Date(this.approved["date"].split('T')[0]),
-            title: this.approved["problem"] + '/' + this.approved["uid"],
-            color: colors.yellow,
-            actions: this.actions,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
-            },
-            draggable: true
-          }
-          ]
-      }
+    }
+
+    function convertDateToUTC(date) {
+      return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
     }
 
 
+    function processed(data) {
+      localStorage.setItem('name', JSON.stringify(data))
 
+    }
   }
+
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
