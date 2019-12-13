@@ -12,6 +12,7 @@
   </ng-container>
   <ng-template #logIn>
     <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/books">Resources</a>
     <div *ngIf="getRole()=='student'">
     <a routerLink="/create">Create</a>
     </div>
@@ -21,6 +22,7 @@
   </ng-template>
   <ng-template #logOut>
     <a routerLink="/login">Log in</a>
+
   </ng-template>
 </div>
 </div>

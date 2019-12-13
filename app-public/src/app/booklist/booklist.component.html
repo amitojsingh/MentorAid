@@ -1,0 +1,12 @@
+<div class="container listing">
+  <div class="row">
+    <div *ngFor="let book of books">
+      <div class="col">
+        <img class="rounded-circle"  src={{book.image}} />
+        <h2 class="name">{{book.name}}</h2>
+        <p class="summary">{{book.summary}}</p>
+        <p><a class="btn btn-secondary" href="../book/{{book._id}}">View Details</a></p>
+      </div>
+    </div>
+  </div>
+</div>

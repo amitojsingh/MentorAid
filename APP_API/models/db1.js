@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-const dbURI = 'mongodb+srv://amitoj:amitoj@cluster0-jan8o.mongodb.net/test?retryWrites=true&w=majority';
-require('./stdrequest');
-
-mongoose.connect(dbURI, {dbName: 'MentorAid'});
+const dbURI = 'mongodb+srv://Amitoj:amitoj@cluster0-yykg5.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(dbURI, {dbName: 'bookfinaldb'});
 mongoose.connection.on('connected', () => {
     console.log(`Mongoose connected to ${dbURI}`);
 });
@@ -38,5 +36,5 @@ process.on('SIGTERM', () => {
     });
 });
 
-
+require('./book');
 

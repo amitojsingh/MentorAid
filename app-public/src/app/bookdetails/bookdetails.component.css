@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Noticia+Text|Satisfy&display=swap');
+app-header{
+  display:none;
+}
+img{
+  width:100%;
+}
+.details{
+  margin:2em;
+  display:flex;
+}
+.text-wrapper{
+  margin:2em;
+  width:50%;
+}
+h2{
+  font-size:5em;
+  color:#2f2f2f;
+  font-family: 'Noticia Text', serif;
+}
+p{
+  text-align: justify;
+}
+.author{
+  text-align:center;
+  font-family: 'Satisfy', cursive;
+}
+.image-wrapper{
+  width:50%;
+}
+.summary{
+  text-align: justify;
+}
