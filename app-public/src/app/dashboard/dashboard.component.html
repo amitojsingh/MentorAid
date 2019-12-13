@@ -2,39 +2,54 @@
 
 </ng-container>
 <ng-template #employee>
-  <h2>Pending Requests</h2>
+  <h2>Requests</h2>
+  <div class="card-wrapper">
 <div *ngFor="let r of teacherPending">
+  <div class="card pendingCard" >
+    <span style="width:70px; font-size:0.8em; margin-left:auto;" class="badge badge-light">pending</span>
   <p>UID= {{r.uid}}</p>
   <p>{{r.subject}}</p>
   <p>{{r.problem}}</p>
-  <p>{{r.date}}</p>
   <a (click)="getSingleRequest(r._id)">View Details</a>
+  </div>
 </div>
-  <h2>Approved Request</h2>
   <div *ngFor="let r of teacherApproved">
-    <p>UID= {{r.uid}}</p>
+    <div class="card approveCard">
+      <span style="width:70px; font-size:0.8em; margin-left:auto;" class="badge badge-light">Approved</span>
+      <h4>{{r.problem}}</h4>
+    <p>{{r.uid}}</p>
     <p>{{r.subject}}</p>
-    <p>{{r.problem}}</p>
-    <P>{{r.requestStatus}}</P><br>
-    <p>{{r.date}}</p>
+
+    </div>
+  </div>
   </div>
   <app-calendar-request [content]= teacherApproved ></app-calendar-request>
+
 </ng-template>
 <ng-template #student>
-  <h2>Pending Request</h2>
+  <h2>Requests</h2>
+
+  <div class="card-wrapper">
+
   <div *ngFor="let r of studentPending">
-    <p>UID= {{r.uid}}</p>
-    <p>{{r.tid}}</p>
-    <p>{{r.subject}}</p>
-    <p>{{r.problem}}</p>
+    <div class="card pendingCard" >
+      <span style="width:70px; font-size:0.8em; margin-left:auto;" class="badge badge-light">pending</span>
+      <h3>{{r.problem}}</h3>
+      <p>{{r.subject}}</p>
+      <p><span>Professor: </span>{{r.tid}}</p>
+
+
+    </div>
   </div>
-  <h2>Approved Request</h2>
   <div *ngFor="let r of studentApproved">
-    <p>UID= {{r.uid}}</p>
-    <p>{{r.tid}}</p>
-    <p>{{r.subject}}</p>
-    <p>{{r.problem}}</p>
-    <p>{{r.date}}</p>
+
+    <div class="card approveCard">
+      <span style="width:70px; font-size:0.8em; margin-left:auto;" class="badge badge-light">Approved</span>
+      <h3>{{r.problem}}</h3>
+      <p>{{r.subject}}</p>
+      <p><span>Professor: </span>{{r.tid}}</p>
+    </div>
+  </div>
   </div>
   <app-calendar-request [content]= studentApproved ></app-calendar-request>
 </ng-template>

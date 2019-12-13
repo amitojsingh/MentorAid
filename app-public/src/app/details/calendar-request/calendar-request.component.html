@@ -1,6 +1,7 @@
 
+<div class="date">
 <div
-  class="btn btn-primary"
+  class="btn btn-primary "
   mwlCalendarPreviousView
   [view]="view"
   [(viewDate)]="viewDate"
@@ -24,10 +25,11 @@
 >
   Next
 </div>
-<div class="col-md-4">
+</div>
+<div class="col-md-4 month-wrapper">
   <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
 </div>
-<div class="col-md-4">
+<div class="col-md-4 button-wrapper">
   <div class="btn-group">
     <div
       class="btn btn-primary"

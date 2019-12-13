@@ -1,14 +1,29 @@
+<div class="wrapper">
+  <div class="login-wrapper">
+ <h1> Login</h1>
+  <p>Need an Account? Contact the college</p>
+  </div>
+  <div class="block-wrapper d-flex">
+    <div class="contetn-wrapper">
+      <img src="/assets/images/conestoga.png">
+    </div>
+    <div class="form-wrapper">
 <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
     <div role="alert" *ngIf="formError">
         {{formError}}
     </div>
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" formControlName="username" class="form-control"[ngClass]="{'is-invalid':submitted && f.username.errors}" id ="username" autofocus>
+        <input type="text" placeholder="username" formControlName="username" class="form-control"[ngClass]="{'is-invalid':submitted && f.username.errors}" id ="username" autofocus>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" formControlName="password" class="form-control"[ngClass]="{'is-invalid':submitted && f.password.errors}"id ="password">
+        <input placeholder="password" type="password" formControlName="password" class="form-control"[ngClass]="{'is-invalid':submitted && f.password.errors}"id ="password">
     </div>
-    <button class="btn btn-success" type ="submit">Login</button>
+    <button class="btn btn-outline-success" type ="submit">Login</button>
 </form>
+    </div>
+
+  </div>
+  <p class="privacy">*By signing up, you agree to our Terms of Use and to receive Wix emails & updates and acknowledge that you read our Privacy Policy.</p>
+</div>

@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Halant|Nunito+Sans&display=swap');
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  height:800px;
+}
+input{
+  width:400px;
+  padding-top:1em;
+  padding-bottom:1em;
+  font-size:30px;
+  font-size:1em;
+  border:none;
+  border-bottom: 1px solid #ecf0f1;
+  font-family: 'Nunito Sans', sans-serif;
+}
+p.privacy{
+  width:40%;
+  text-align:center;
+}
+h1{
+  font-family: 'Halant',serif;
+  font-size:4em;
+  color:#000;
+}
+label{
+  display:none;
+}
+.form-wrapper,.contetn-wrapper{
+  margin:2em;
+}
+.form-wrapper{
+  border-left: 1px solid #ecf0f1;
+  padding-left:9em;
+}
+.login-wrapper{
+}
+.contetn-wrapper{
+  text-align:center;
+}
+img{
+  width:40%;
+}
+p{
+  font-family: 'Nunito Sans', sans-serif;
+}
