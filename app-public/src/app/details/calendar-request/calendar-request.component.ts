@@ -139,7 +139,6 @@ export class CalendarRequestComponent implements OnInit {
           }
           this.newarray.push(newevent);
           this.events = this.newarray;
-          console.log(this.events)
         }
       else if((this.userRole=="employee")&&(this.currentUser[0]==this.approved[i].tid)) {
         newevent = {
@@ -150,7 +149,6 @@ export class CalendarRequestComponent implements OnInit {
         }
         this.newarray.push(newevent);
         this.events = this.newarray;
-        console.log(this.events)
       }
     }
     }

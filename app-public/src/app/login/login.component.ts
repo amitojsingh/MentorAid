@@ -31,18 +31,23 @@ public credentials = {
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
-    }
-    else {
-      if (this.authenticationService.login(this.loginForm.value)){
-        this.authenticationService.login(this.loginForm.value)
-        .then(() => this.router.navigate(['/dashboard']))
-        .catch((err) => {
-          this.formError = "incorrect username or password"
-        });
+    } else {
+      var college = this.loginForm.value.username.split('@')[1];
+      if ((college !="")&&(college == "conestogac.on.ca")) {
+        this.loginForm.value.username = this.loginForm.value.username.split('@')[0];
+        if (this.authenticationService.login(this.loginForm.value)) {
+          this.authenticationService.login(this.loginForm.value)
+            .then(() => this.router.navigate(['/dashboard']))
+            .catch((err) => {
+              this.formError = "incorrect username or password"
+            });
+        } else {
+          this.formError = "username or password incorrect";
+
+        }
       }
       else{
-        this.formError = "username or password incorrect";
-
+        this.formError = "Please write full id";
       }
     }
   }
