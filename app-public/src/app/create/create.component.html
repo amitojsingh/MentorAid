@@ -1,26 +1,29 @@
+<div class="container">
 <form (ngSubmit)="createRequest(newrequest)" xmlns="http://www.w3.org/1999/html">
 <div class="form-group">
   <!--<div *ngIf="formError" class="jasmine-alert">
     {{formError}}
   </div>-->
 </div>
-<div *ngFor="let prof of teachers;" class="form-group">
- {{prof}} <input [(ngModel)]="newrequest.tid"   type="radio" name="teacher" value="{{prof}}">
+  <div class="prof-wrapper">
+<div *ngFor="let prof of teachers; let i = index" class="form-group">
+  <label for="{{prof}}"> <input [(ngModel)]="newrequest.tid"   type="radio" name="teacher" value="{{prof}}" id ="{{prof}}"><img class="prof-image" src="/assets/images/{{this.images[i]}}"><p> {{prof}}</p></label>
 </div>
+  </div>
 
 <div class="form-group">
   <label for="problem">Problem</label>
-  <input [(ngModel)]="newrequest.problem"type="text" name = "problem" id ="problem">
+  <input [(ngModel)]="newrequest.problem"type="text" class="form-control" name = "problem" id ="problem">
 </div>
 <div class="form-group">
   <label >Subject</label>
-  <select [(ngModel)]="newrequest.subject"  [ngModelOptions]="{standalone: true}">
+  <select [(ngModel)]="newrequest.subject"  class="form-control" [ngModelOptions]="{standalone: true}">
     <option *ngFor="let item of subjects;" value="{{item}}">{{item}}</option>
   </select>
 </div>
 <div class="form-group">
   <label for="count">Number of students</label>
-  <input [(ngModel)]="newrequest.count" type="number" name ="count" id="count">
+  <input class="form-control" [(ngModel)]="newrequest.count" type="number" name ="count" id="count">
 </div>
 <div class="form-group">
   <button class="btn btn-secondary" type="submit">Publish</button>
@@ -28,3 +31,4 @@
 </form>
 
 
+</div>

@@ -7,3 +7,20 @@ img{
   margin-top:1.5rem;
   text-align:center;
 }
+.row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.col{
+
+}
+.list{
+  width:30%;
+}
+p.summary{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  height: 100px;
+}

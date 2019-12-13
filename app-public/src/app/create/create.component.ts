@@ -15,6 +15,7 @@ import {group} from "@angular/animations";
 export class CreateComponent implements OnInit {
   subjects: string[]=[];
   teachers:string[]=[];
+  images: string[]
   currentUser=this.authservice.getCurrentUser();
   public newrequest:{
     uid:string;
@@ -34,6 +35,7 @@ export class CreateComponent implements OnInit {
   constructor(private stdRequestService: StdRequestServiceService,public router:Router,private authservice: AuthenticationService) { }
 
   ngOnInit() {
+    this.images=["", "lisa.jpg","david.jpg","lubna.jpg","rajul.jpg","tanya.jpg","zaman.jpg","steeves.png","jaspinder.jpg","plumtree.jpg","komal.jpg"]
     this.stdRequestService
       .getTeachers()
       .then((teachers: string[]) => {

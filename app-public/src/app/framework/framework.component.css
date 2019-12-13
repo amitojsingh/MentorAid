@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Abel&display=swap');
+
+a{
+  text-decoration: none;
+  margin:1em;
+  font-size:1.2em;
+  color:#000;
+}
+h1{
+font-family: 'Abel', sans-serif;
+  color:#000;
+}
+.col-lg-2{
+  display:flex;
+  justify-content: center;
+  text-align: center;
+}

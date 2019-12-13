@@ -1,6 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
+
 .front-header{
   height:800px;
 display: flex;
+  flex-direction: column;
   justify-content:center;
   align-items:center;
+}
+
+h1{
+  color:#fff;
+  font-size:4em;
+}
+p{
+  color:#fff;
+  font-size:3em;
+  font-family:'Dancing Script', cursive;
 }
