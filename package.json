@@ -12,7 +12,7 @@
     "express": "^4.16.4",
     "graceful-fs": "^4.2.2",
     "http-errors": "~1.6.3",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "ldapauth-fork": "^4.2.0",
     "ldapjs": "^1.0.2",
     "lodash": "^4.17.15",
